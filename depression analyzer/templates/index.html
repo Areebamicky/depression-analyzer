@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Depression analyzer</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body style="background: hsl(203, 78%, 33%);">
+ <div class="login">
+	<h1>Depression analysis</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+     <div>
+      <div>
+      
+        
+        <form method="POST" action="{{ url_for('upload_file')}}" enctype="multipart/form-data">
+          <input type="file" name="file">
+          <button type="submit" class="btn btn-primary btn-block btn-large">Predict </button>
+          <!-- #<img src="{{ plot_url }}" #alt="Sentiment Plot"> -->
+          <h6>non-depression: {{ non_depression_percentage }}%  ,  depression: {{ depression_percentage }}%</h6>
+          
+           
+        </form></div>
+        <div><button id="predict-again" class="btn btn-primary btn-block btn-large">Predict Again??</button><br><br></div>
+        
+
+        <form action="{{ url_for('predict')}}"method="post">
+        <input type="text" name="Enter your tweet here" placeholder="Enter your tweet here" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict </button>
+    </form>
+    </div>
+    {{ prediction_text }}
+
+ </div>
+ <script>
+  document.getElementById('predict-again').addEventListener('click', function() {
+    window.location.href = "{{ url_for('home') }}";
+  });
+</script>
+</body>
+
+</html>
